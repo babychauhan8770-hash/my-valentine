@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just One Question ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    animation: pop 0.6s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    margin-right: 20px;
+  }
+
+  #yesBtn:hover {
+    transform: scale(1.05);
+  }
+
+  #noBtn {
+    background: #ccc;
+    color: #333;
+    position: absolute;
+  }
+
+  .heart {
+    position: absolute;
+    color: rgba(255,255,255,0.6);
+    font-size: 20px;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Will you be my Valentine? ❤️</h1>
+  <button id="yesBtn" onclick="yesClicked()">Yes</button>
+  <button id="noBtn" onmouseover="moveNo()">No</button>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const texts = ["No", "Are you sure?", "Really?", "Think again 😏", "Not allowed"];
+  let count = 0;
+
+  function moveNo() {
+    count++;
+    noBtn.innerText = texts[count % texts.length];
+
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "scale(0.9)";
+  }
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div class="card">
+        <h1>❤️</h1>
+        <p style="font-size:20px; line-height:1.6;">
+          Tum mere ho — bina kisi pressure ke.<br><br>
+          Tum jo chaho karo, jahan chaho jao.<br>
+          Main bas saath hoon, bandhan nahi.<br><br>
+          I love you.
+        </p>
+      </div>
+    `;
+  }
+
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+</script>
+
+</body>
+</html>
