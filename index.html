@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Just One Question ❤️</title>
 
 <style>
   body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    background: linear-gradient(135deg, #ffe6eb, #ffd1dc);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,26 +19,36 @@
 
   .card {
     background: white;
-    padding: 40px;
-    border-radius: 20px;
+    padding: 30px 25px;
+    border-radius: 22px;
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     animation: pop 0.6s ease;
+    max-width: 90%;
+    z-index: 2;
+  }
+
+  .card.long {
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: left;
   }
 
   @keyframes pop {
-    from { transform: scale(0.8); opacity: 0; }
+    from { transform: scale(0.85); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
 
-  h1 {
+  h1, h2 {
     color: #ff4d6d;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   button {
-    padding: 12px 28px;
-    font-size: 18px;
+    padding: 16px 36px;
+    font-size: 20px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -47,11 +58,11 @@
   #yesBtn {
     background: #ff4d6d;
     color: white;
-    margin-right: 20px;
+    margin-right: 15px;
   }
 
   #yesBtn:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   #noBtn {
@@ -62,9 +73,10 @@
 
   .heart {
     position: absolute;
-    color: rgba(255,255,255,0.6);
-    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    font-size: 22px;
     animation: float 6s linear infinite;
+    z-index: 1;
   }
 
   @keyframes float {
@@ -75,6 +87,34 @@
     to {
       transform: translateY(-10vh);
       opacity: 0;
+    }
+  }
+
+  .confetti {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    top: -20px;
+    animation: fall linear forwards;
+    z-index: 3;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .card.long p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    button {
+      font-size: 18px;
+      padding: 14px 30px;
     }
   }
 </style>
@@ -97,38 +137,79 @@
     count++;
     noBtn.innerText = texts[count % texts.length];
 
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-    noBtn.style.transform = "scale(0.9)";
   }
 
   function yesClicked() {
-    document.body.innerHTML = `
-      <div class="card">
-        <h1>❤️</h1>
-        <p style="font-size:20px; line-height:1.6;">
-          Tum mere ho — bina kisi pressure ke.<br><br>
-          Tum jo chaho karo, jahan chaho jao.<br>
-          Main bas saath hoon, bandhan nahi.<br><br>
-          I love you.
-        </p>
-      </div>
-    `;
+    launchConfetti();
+
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <div class="card long">
+          <h2>Happy Valentine’s Day Pati ❤️</h2>
+
+          <p>
+            I know you don’t have any other option than saying yes 😂<br><br>
+
+            I love you like, <b>a lot</b>.<br>
+            Thodi messy hoon, thodi ziddi,<br>
+            aur haan thoda ladti bhi hoon<br>
+            kyunki I love you so much like 1, 2, 3 .................. ∞ ❤️<br><br>
+
+            Kabhi kabhi loud ho jaati hoon,<br>
+            but for sure usko dheere dheere kam kar lungi,<br>
+            but you should also start expressing<br>
+            the love you have in your heart 🤍<br>
+            Thoda expressive ban jao ❤️<br><br>
+
+            Par ek baat sach hai<br>
+            I love being with you, being <b>me</b>. 😘<br><br>
+
+            The care, efforts you put into us<br>
+            means more to me than you know.<br>
+            Lots of kisses for that 😘😘😘<br><br>
+
+            I want to spend the whole life with you and celebrate<br>
+            all the valentines and normal days too 😂<br>
+            in the most lovable and romantic ways,<br>
+            through all ups and downs ❤️<br><br>
+
+            <b>I love you ❤️</b><br>
+            From your Baby Biwi 💜
+          </p>
+        </div>
+      `;
+    }, 1200);
   }
 
-  // floating hearts
+  function launchConfetti() {
+    const colors = ["#ff4d6d", "#ffd1dc", "#ffe6eb", "#ff99aa", "#ffffff"];
+
+    for (let i = 0; i < 150; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration = Math.random() * 2 + 3 + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 5000);
+    }
+  }
+
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    heart.style.fontSize = Math.random() * 20 + 14 + "px";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-  }, 300);
+  }, 350);
 </script>
 
 </body>
