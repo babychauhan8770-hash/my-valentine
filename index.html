@@ -9,7 +9,7 @@
   body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #ffe6eb, #ffd1dc);
+    background: linear-gradient(135deg, #fff0f6, #f3e8ff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,63 +18,70 @@
   }
 
   .card {
-    background: white;
-    padding: 30px 25px;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 24px 20px;
     border-radius: 22px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     animation: pop 0.6s ease;
-    max-width: 90%;
+    max-width: 92%;
     z-index: 2;
   }
 
   .card.long {
     max-width: 520px;
-    max-height: 85vh;
+    max-height: 80vh;
     overflow-y: auto;
     text-align: left;
+    background: rgba(255, 240, 248, 0.75);
+    backdrop-filter: blur(10px);
   }
 
   @keyframes pop {
-    from { transform: scale(0.85); opacity: 0; }
+    from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
 
   h1, h2 {
-    color: #ff4d6d;
-    margin-bottom: 20px;
+    color: #c65fcf;
+    margin-bottom: 16px;
     text-align: center;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 1.3rem;
   }
 
   button {
-    padding: 16px 36px;
-    font-size: 20px;
+    padding: 12px 28px;
+    font-size: 16px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
 
   #yesBtn {
-    background: #ff4d6d;
+    background: #f48fb1;
     color: white;
-    margin-right: 15px;
+    margin-right: 10px;
   }
 
   #yesBtn:hover {
-    transform: scale(1.08);
+    transform: scale(1.07);
   }
 
   #noBtn {
-    background: #ccc;
-    color: #333;
+    background: #f3e5f5;
+    color: #6a1b9a;
     position: absolute;
   }
 
   .heart {
     position: absolute;
-    color: rgba(255,255,255,0.7);
-    font-size: 22px;
+    color: rgba(255, 182, 193, 0.5);
+    font-size: 20px;
     animation: float 6s linear infinite;
     z-index: 1;
   }
@@ -92,8 +99,8 @@
 
   .confetti {
     position: fixed;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     top: -20px;
     animation: fall linear forwards;
     z-index: 3;
@@ -107,14 +114,18 @@
   }
 
   .card.long p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
+    color: #4a235a;
   }
 
   @media (max-width: 480px) {
+    h1 {
+      font-size: 1.15rem;
+    }
     button {
-      font-size: 18px;
-      padding: 14px 30px;
+      font-size: 15px;
+      padding: 11px 24px;
     }
   }
 </style>
@@ -130,6 +141,7 @@
 
 <script>
   const noBtn = document.getElementById("noBtn");
+  const card = document.getElementById("card");
   const texts = ["No", "Are you sure?", "Really?", "Think again 😏", "Not allowed"];
   let count = 0;
 
@@ -148,48 +160,43 @@
     launchConfetti();
 
     setTimeout(() => {
-      document.body.innerHTML = `
-        <div class="card long">
-          <h2>Happy Valentine’s Day Pati ❤️</h2>
+      card.classList.add("long");
+      card.innerHTML = `
+        <h2>Happy Valentine’s Day Pati ❤️</h2>
+        <p>
+          I know you don’t have any other option than saying yes 😂<br><br>
 
-          <p>
-            I know you don’t have any other option than saying yes 😂<br><br>
+          I love you like, <b>a lot</b>.<br>
+          Thodi messy hoon, thodi ziddi,<br>
+          aur haan thoda ladti bhi hoon<br>
+          kyunki I love you so much like 1, 2, 3… ∞ ❤️<br><br>
 
-            I love you like, <b>a lot</b>.<br>
-            Thodi messy hoon, thodi ziddi,<br>
-            aur haan thoda ladti bhi hoon<br>
-            kyunki I love you so much like 1, 2, 3 .................. ∞ ❤️<br><br>
+          Kabhi kabhi loud ho jaati hoon,<br>
+          but dheere dheere kam kar lungi 🤍<br>
+          tum thoda sa aur expressive ho jao ❤️<br><br>
 
-            Kabhi kabhi loud ho jaati hoon,<br>
-            but for sure usko dheere dheere kam kar lungi,<br>
-            but you should also start expressing<br>
-            the love you have in your heart 🤍<br>
-            Thoda expressive ban jao ❤️<br><br>
+          Par ek baat sach hai<br>
+          I love being with you, being <b>me</b> 😘<br><br>
 
-            Par ek baat sach hai<br>
-            I love being with you, being <b>me</b>. 😘<br><br>
+          The care and efforts you put into us<br>
+          mean more to me than you know 💜<br>
+          Lots of kisses for that 😘😘😘<br><br>
 
-            The care, efforts you put into us<br>
-            means more to me than you know.<br>
-            Lots of kisses for that 😘😘😘<br><br>
+          I want to spend my whole life with you<br>
+          celebrating valentines and normal days too 😂<br>
+          through all ups and downs ❤️<br><br>
 
-            I want to spend the whole life with you and celebrate<br>
-            all the valentines and normal days too 😂<br>
-            in the most lovable and romantic ways,<br>
-            through all ups and downs ❤️<br><br>
-
-            <b>I love you ❤️</b><br>
-            From your Baby Biwi 💜
-          </p>
-        </div>
+          <b>I love you ❤️</b><br>
+          Your Baby Biwi 💜
+        </p>
       `;
-    }, 1200);
+    }, 800);
   }
 
   function launchConfetti() {
-    const colors = ["#ff4d6d", "#ffd1dc", "#ffe6eb", "#ff99aa", "#ffffff"];
+    const colors = ["#f8bbd0", "#e1bee7", "#fce4ec", "#ede7f6"];
 
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 120; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
       confetti.style.left = Math.random() * 100 + "vw";
@@ -206,10 +213,10 @@
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 14 + "px";
+    heart.style.fontSize = Math.random() * 18 + 14 + "px";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-  }, 350);
+  }, 400);
 </script>
 
 </body>
